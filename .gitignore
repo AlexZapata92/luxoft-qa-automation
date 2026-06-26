@@ -1,0 +1,6 @@
+node_modules/
+reports/playwright/test-results/
+reports/playwright/html/
+.env
+test-results/
+playwright/.cache/

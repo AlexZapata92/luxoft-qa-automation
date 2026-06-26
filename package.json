@@ -1,0 +1,16 @@
+{
+  "name": "luxoft-qa-automation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Playwright UI automation for the-internet.herokuapp.com login flow",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report reports/playwright/html"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "dotenv": "^17.4.1"
+  }
+}
