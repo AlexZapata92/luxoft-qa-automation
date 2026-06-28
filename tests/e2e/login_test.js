@@ -1,10 +1,12 @@
 Feature('Login flow - Form authentication (the-internet.herokuapp.com)');
 
-const { I, loginPage, secureAreaPage, data } = inject();
+const { I, loginPage, secureAreaPage, data, teardownHelper } = inject();
 
 Before(async () => {
+  await teardownHelper.openMockAuditConnection();
   loginPage.open();
 });
+
 
 Scenario(
   'TC-POS-01 — valid credentials redirect to secure area with success message @TC-POS-01',
@@ -53,3 +55,15 @@ Scenario('TC-POS-02 — logout returns to login with confirmation message @TC-PO
     I.seeInCurrentUrl('/login');
     loginPage.seeFlashMessage(data.flashMessages.logoutSuccess);
 }).tag('@smoke');
+
+After(async () => {
+  try {
+    I.say('TEARDOWN: CLOSE MOCK AUDIT CONNECTION');
+      await teardownHelper.closeMockAuditConnection();
+
+    I.say('TEARDOWN: CLEAR MOCK SESSION ARTIFACTS');
+      await teardownHelper.clearMockSessionArtifacts();
+  } catch (err) {
+    console.error('Teardown failed:', err);
+  }
+});

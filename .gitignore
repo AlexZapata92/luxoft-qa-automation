@@ -1,5 +1,6 @@
 node_modules/
 reports/
+!reports/allure/results/.gitkeep
 .env
 test-results/
 playwright/.cache/

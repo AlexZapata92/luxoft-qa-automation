@@ -4,11 +4,21 @@
   "version": "1.0.0",
   "description": "CodeceptJS + Playwright UI automation for the-internet.herokuapp.com login flow",
   "scripts": {
+    "allure:clean-results": "node scripts/clean-allure-results.cjs",
+    "pretest:e2e": "npm run allure:clean-results",
+    "pretest:e2e:headed": "npm run allure:clean-results",
+    "pretest:e2e:verbose": "npm run allure:clean-results",
     "test:e2e": "codeceptjs run --steps",
     "test:e2e:headed": "cross-env HEADED=true codeceptjs run --steps",
-    "test:e2e:verbose": "codeceptjs run --steps --verbose"
+    "test:e2e:verbose": "codeceptjs run --steps --verbose",
+    "report:allure:generate": "allure generate reports/allure/results -o reports/allure/report --clean",
+    "report:allure:open": "allure open reports/allure/report",
+    "report:allure:serve": "allure serve reports/allure/results"
   },
   "devDependencies": {
+    "allure-codeceptjs": "^3.4.5",
+    "allure-commandline": "^2.38.1",
+    "allure-js-commons": "^3.4.5",
     "codeceptjs": "^3.7.0",
     "cross-env": "^7.0.3",
     "dotenv": "^17.4.1",

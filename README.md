@@ -68,9 +68,28 @@ npm run test:e2e
 | `pages/` | Page objects |
 | `steps_file.js` | Custom `I` actor steps |
 | `fixtures/` | JSON test data and loader |
+| `helpers/` | Support modules (e.g. mock teardown helpers) |
 | `shared/` | Shared selectors |
 | `codecept.conf.js` | CodeceptJS and Playwright helper configuration |
-| `reports/` | Failure screenshots and artifacts (gitignored) |
+| `reports/` | Codecept artifacts, Allure results, and HTML report (gitignored) |
+
+## Reporting (Allure)
+
+Tests write raw Allure results to `reports/allure/results`. Generate or serve the HTML report after a run:
+
+| Command | Purpose |
+|---------|---------|
+| `npm run report:allure:serve` | Serve interactive report from latest results |
+| `npm run report:allure:generate` | Build static report under `reports/allure/report` |
+| `npm run report:allure:open` | Open generated static report |
+| `npm run allure:clean-results` | Clear raw results (runs automatically before `test:e2e*`) |
+
+Typical workflow:
+
+```bash
+npm run test:e2e
+npm run report:allure:serve
+```
 
 ## Architecture
 
