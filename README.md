@@ -71,6 +71,7 @@ npm run test:e2e
 | `helpers/` | Support modules (e.g. mock teardown helpers) |
 | `shared/` | Shared selectors |
 | `codecept.conf.js` | CodeceptJS and Playwright helper configuration |
+| `.github/workflows/` | GitHub Actions E2E workflow (manual trigger) |
 | `reports/` | Codecept artifacts, Allure results, and HTML report (gitignored) |
 
 ## Reporting (Allure)
@@ -104,3 +105,16 @@ npm run report:allure:serve
 Credentials for the-internet.herokuapp.com are documented on the login page and stored in `fixtures/login-test-data.json`.
 
 For non-public credentials, use environment variables (`.env`, gitignored) or CI secrets rather than committed files.
+
+## Continuous integration
+
+A GitHub Actions workflow is included at [`.github/workflows/e2e.yml`](./.github/workflows/e2e.yml).
+
+| Mode | How to run |
+|------|------------|
+| **GitHub Actions (manual)** | Repository → **Actions** → **E2E** → **Run workflow** |
+| **Local CI mirror** | `npm run test:ci` (Windows: `npm run test:ci:local`) |
+
+The workflow uses `workflow_dispatch` only so it does not consume Actions minutes on every push. To run automatically on `main`, uncomment the `push` / `pull_request` triggers in the workflow file.
+
+The local scripts in `scripts/run-ci-local.ps1` and `scripts/run-ci-local.sh` mirror the CI steps: `npm ci`, browser install, test execution, and Allure report generation.

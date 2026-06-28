@@ -11,6 +11,8 @@
     "test:e2e": "codeceptjs run --steps",
     "test:e2e:headed": "cross-env HEADED=true codeceptjs run --steps",
     "test:e2e:verbose": "codeceptjs run --steps --verbose",
+    "test:ci": "cross-env CI=true npm run test:e2e && npm run report:allure:generate",
+    "test:ci:local": "powershell -ExecutionPolicy Bypass -File scripts/run-ci-local.ps1",
     "report:allure:generate": "allure generate reports/allure/results -o reports/allure/report --clean",
     "report:allure:open": "allure open reports/allure/report",
     "report:allure:serve": "allure serve reports/allure/results"
