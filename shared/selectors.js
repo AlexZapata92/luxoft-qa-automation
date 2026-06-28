@@ -1,6 +1,4 @@
-/**
- * Shared selectors for the-internet.herokuapp.com login flow.
- */
+/** Selectors for the-internet.herokuapp.com login flow. */
 module.exports = {
   login: {
     path: '/login',

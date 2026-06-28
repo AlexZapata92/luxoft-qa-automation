@@ -1,25 +1,25 @@
-# QA Automation Take-Home — Login flow
+# QA Automation — Login Flow
 
-Playwright (JavaScript) UI automation for the **form authentication** user flow on [the-internet.herokuapp.com](https://the-internet.herokuapp.com/login).
+End-to-end UI automation for the **form authentication** user flow on [the-internet.herokuapp.com](https://the-internet.herokuapp.com/login).
 
-Structured after the same Page Object + flow-helper pattern used in the Velozient project, simplified for this assignment.
+Built with CodeceptJS on Playwright using page objects, dependency injection, and structured scenarios.
 
-## Submission checklist
+## Deliverables
 
-| Deliverable | Location |
-|-------------|----------|
-| Test case document (meaningful user flow, structured cases) | [`TEST_CASES.md`](./TEST_CASES.md) |
-| Automated tests (5 cases from `TEST_CASES.md`) | [`tests/e2e/login.spec.js`](./tests/e2e/login.spec.js) |
-| How to run + project overview | This README |
+| Item | Location |
+|------|----------|
+| Test case document | [`TEST_CASES.md`](./TEST_CASES.md) |
+| Automated tests (5 cases) | [`tests/e2e/login_test.js`](./tests/e2e/login_test.js) |
+| Setup and execution guide | This README |
 
 ## User flow under test
 
 **Login → secure area → logout**
 
-1. Guest opens the login form.
-2. Submits credentials (valid or invalid).
-3. On success, lands on `/secure` and can log out.
-4. On failure, stays on `/login` with a flash error message.
+1. Open the login form.
+2. Submit credentials (valid or invalid).
+3. On success, reach `/secure` and log out.
+4. On failure, remain on `/login` with a flash error message.
 
 ## Prerequisites
 
@@ -47,12 +47,11 @@ npm run test:e2e
 | Command | Purpose |
 |---------|---------|
 | `npm run test:e2e:headed` | Run with visible browser |
-| `npm run test:e2e:ui` | Playwright UI mode |
-| `npm run test:e2e:report` | Open last HTML report |
+| `npm run test:e2e:verbose` | Verbose CodeceptJS output |
 
 ### Environment
 
-- **Default base URL:** `https://the-internet.herokuapp.com` (`playwright.config.js`)
+- **Default base URL:** `https://the-internet.herokuapp.com` (`codecept.conf.js`)
 - **Override:** set `BASE_URL` in `.env` or the shell environment
 
 ```bash
@@ -60,32 +59,29 @@ set BASE_URL=https://the-internet.herokuapp.com
 npm run test:e2e
 ```
 
-On CI, set `CI=true` to enable retries and `forbidOnly` (same pattern as Velozient).
-
 ## Project layout
 
 | Path | Purpose |
 |------|---------|
 | `TEST_CASES.md` | Manual test case documentation |
-| `tests/e2e/` | Playwright specs |
-| `tests/utilities/` | Custom test fixture + `LoginFlow` helper |
-| `pages/` | Page objects (`LoginPage`, `SecureAreaPage`) |
-| `fixtures/` | Test data (credentials, expected messages) |
+| `tests/e2e/` | CodeceptJS scenarios (`*_test.js`) |
+| `pages/` | Page objects |
+| `steps_file.js` | Custom `I` actor steps |
+| `fixtures/` | JSON test data and loader |
 | `shared/` | Shared selectors |
-| `reports/` | Generated HTML report and artifacts (gitignored) |
+| `codecept.conf.js` | CodeceptJS and Playwright helper configuration |
+| `reports/` | Failure screenshots and artifacts (gitignored) |
 
-## Design notes
+## Architecture
 
-- **Page objects** encapsulate locators and page actions (`pages/`).
-- **`LoginFlow`** composes page objects into reusable journey steps (`tests/utilities/login-flow.js`).
-- **Custom fixture** (`tests/utilities/test.js`) injects `loginFlow` into specs, similar to the Velozient `I` DSL but kept minimal for JavaScript.
-- **Selectors** live in one place (`shared/selectors.js`) to ease maintenance.
+- **Playwright** drives the browser; **CodeceptJS** provides the scenario layer.
+- Page objects use `const { I } = inject();` with methods such as `I.fillField` and `I.see`.
+- Scenarios declare dependencies via `const { I, loginPage, secureAreaPage, data } = inject();`.
+- Step labels use `I.say('...')` for readable execution output.
+- Page objects and data modules are registered in `codecept.conf.js` under `include`.
 
-## Test credentials
+## Test data and credentials
 
-The demo site documents a single valid account:
+Credentials for the-internet.herokuapp.com are documented on the login page and stored in `fixtures/login-test-data.json`.
 
-- Username: `tomsmith`
-- Password: `SuperSecretPassword!`
-
-These are stored in `fixtures/credentials.js` and referenced by both manual and automated tests.
+For non-public credentials, use environment variables (`.env`, gitignored) or CI secrets rather than committed files.

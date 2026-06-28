@@ -29,7 +29,7 @@
 
 ### Automated?
 
-Yes — `tests/e2e/login.spec.js` (TC-POS-01).
+Yes — `tests/e2e/login_test.js` (TC-POS-01).
 
 ---
 
@@ -56,7 +56,7 @@ Yes — `tests/e2e/login.spec.js` (TC-POS-01).
 
 ### Automated?
 
-Yes — `tests/e2e/login.spec.js` (TC-NEG-01).
+Yes — `tests/e2e/login_test.js` (TC-NEG-01).
 
 ---
 
@@ -83,7 +83,7 @@ Yes — `tests/e2e/login.spec.js` (TC-NEG-01).
 
 ### Automated?
 
-Yes — `tests/e2e/login.spec.js` (TC-NEG-02).
+Yes — `tests/e2e/login_test.js` (TC-NEG-02).
 
 ---
 
@@ -110,7 +110,7 @@ Yes — `tests/e2e/login.spec.js` (TC-NEG-02).
 
 ### Automated?
 
-Yes — `tests/e2e/login.spec.js` (TC-NEG-03).
+Yes — `tests/e2e/login_test.js` (TC-NEG-03).
 
 ---
 
@@ -135,7 +135,7 @@ Yes — `tests/e2e/login.spec.js` (TC-NEG-03).
 
 ### Automated?
 
-Yes — `tests/e2e/login.spec.js` (TC-POS-02).
+Yes — `tests/e2e/login_test.js` (TC-POS-02).
 
 ---
 

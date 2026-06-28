@@ -1,0 +1,25 @@
+{
+  "users": {
+    "valid": {
+      "username": "tomsmith",
+      "password": "SuperSecretPassword!"
+    },
+    "invalidUsername": {
+      "username": "invalid_user"
+    },
+    "invalidPassword": {
+      "password": "wrong-password"
+    },
+    "empty": {
+      "username": "",
+      "password": ""
+    }
+  },
+  "flashMessages": {
+    "loginSuccess": "You logged into a secure area!",
+    "logoutSuccess": "You logged out of the secure area!",
+    "invalidUsername": "Your username is invalid!",
+    "invalidPassword": "Your password is invalid!",
+    "missingUsername": "Your username is invalid!"
+  }
+}
