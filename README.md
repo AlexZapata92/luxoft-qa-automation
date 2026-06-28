@@ -4,6 +4,10 @@ End-to-end UI automation for the **form authentication** user flow on [the-inter
 
 Built with CodeceptJS on Playwright using page objects, dependency injection, and structured scenarios.
 
+## Framework choice
+
+**CodeceptJS** was selected as a scenario layer on top of **Playwright** to improve readability for non-technical reviewers. Scenarios read in plain language (`Feature`, `Scenario`, `I.say`, page object methods), while Playwright continues to handle browser execution under the hood.
+
 ## Deliverables
 
 | Item | Location |
